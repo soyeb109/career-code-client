@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const JobDetails = () => {
   const { job } = useLoaderData();
@@ -30,6 +30,11 @@ const JobDetails = () => {
               <h4>Job Status: {job.status}</h4>
               <h4>HR Name: {job.hr_name}</h4>
               <h4>HR Email: {job.hr_email}</h4>
+            </div>
+            <div className="card-actions justify-end">
+              <Link to="/">
+                <button className="btn btn-primary">Apply Now!</button>
+              </Link>
             </div>
           </div>
         </div>
