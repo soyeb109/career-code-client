@@ -20,6 +20,13 @@ const Navbar = () => {
       <li>
         <NavLink to="/about">About</NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/myApplications">My Applications</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (

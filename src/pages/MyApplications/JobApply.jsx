@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 
