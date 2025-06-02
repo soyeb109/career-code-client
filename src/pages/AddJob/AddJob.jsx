@@ -1,5 +1,7 @@
 import React from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
   const { user } = useAuth();
@@ -27,6 +29,27 @@ const AddJob = () => {
     newJob.responsibilites = newJob.responsibilites
       .split(",")
       .map((res) => res.trim());
+
+    newJob.status = "active";
+
+    //save job to db
+    axios
+      .post("http://localhost:5000/jobs", newJob)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Job has been saved",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -115,14 +138,13 @@ const AddJob = () => {
         {/* Application Deadline  */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend">Application Deadline </legend>
-          <input type="date" className="input" />
+          <input name="daeadline" type="date" className="input" />
         </fieldset>
 
         {/* Salary range */}
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <legend className="fieldset-legend">Salary Range</legend>
-
             <div>
               <label className="label">Minimum Salary</label>
               <input
@@ -132,7 +154,6 @@ const AddJob = () => {
                 placeholder="Minimum Salary"
               />
             </div>
-
             <div>
               <label className="label">Maximum Salary</label>
               <input
